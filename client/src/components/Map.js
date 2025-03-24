@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { db, collection, addDoc } from "../firebase";
-import LocationInput from "./LocationInput.js";
 
 const KakaoMap = () => {
     const [map, setMap] = useState(null);
     const [markers, setMarkers] = useState([]);
-    const [placesService, setPlacesService] = useState(null);
 
     useEffect(() => {
         const script = document.createElement("script");
@@ -22,7 +20,6 @@ const KakaoMap = () => {
                 };
                 const newMap = new window.kakao.maps.Map(mapContainer, mapOption);
                 setMap(newMap);
-                setPlacesService(new window.kakao.maps.services.Places());
 
                 // 지도 클릭 시 출발지 추가
                 window.kakao.maps.event.addListener(newMap, "click", function (mouseEvent) {
@@ -66,9 +63,8 @@ const KakaoMap = () => {
 
     return (
         <div>
-            <LocationInput />
             <div id="map" style={{ width: "100%", height: "400px" }}></div>
-            <button onClick={() => console.log("모임 추천 위치 기능 구현 예정!")} style={{ marginTop: "10px" }}>
+            <button onClick={() => console.log("모임 추천 위치 기능 구현 예정!")} className="mt-4 px-6 py-3 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:scale-105 active:scale-95 hover:bg-green-600">
                 모임 추천 위치 보기
             </button>
         </div>
